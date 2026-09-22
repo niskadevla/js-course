@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>27 Атрибуты и свойства</title>
+    <style>
+        body[data-theme="dark"] {
+            background: black;
+        }
+
+        body[data-theme="light"] {
+            background: white;
+        }
+    </style>
+  </head>
+  <body type="text" >
+    <button id="btn" test-id="123">Click me</button>
+    <input id="display" type="text">
+
+    <input id="input" type="checkbox" checked>
+
+    <button id="btnDark" data-theme="dark">Темная тема</button>
+    <button id="btnLight" data-theme="light">Светлая тема</button>
+
+    <script src="main.js"></script>
+  </body>
+</html>
