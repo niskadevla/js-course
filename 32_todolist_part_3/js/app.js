@@ -11,6 +11,8 @@
 const todoForm = document.getElementById('todo-form');
 const todoInput = document.getElementById('todo-input');
 const todoList = document.getElementById('todo-list');
+const emptyState = document.getElementById('empty-state');
+const todoCount = document.getElementById('todo-count');
 
 let todos = [];
 
@@ -39,11 +41,43 @@ function handleAddTodo(event) {
 }
 
 function renderTodos() {
+  updateEmptyState();
+  updateTodoCount();
+
   todoList.innerHTML = todos.map(todo => `
-    <li class="list-group-item" data-id="${todo.id}">
-      ${todo.text}
+    <li 
+      class="list-group-item d-flex align-items-center" 
+      data-id="${todo.id}"
+      >
+        <div class="form-check flex-grow-1">
+          <label class="form-check-label ${todo.completed ? 'completed' : ''}">
+            <input 
+              type="checkbox"
+              class="form-check-input"
+              ${todo.completed ? 'checked' : ''}
+            >
+            ${todo.text}
+          </label>
+        </div>
+        
+        <button class="btn btn-outline-primary btn-sm edit-btn me-1">
+            <i class="bi bi-pencil"></i>
+        </button>
+
+        <button class="btn btn-outline-danger btn-sm delete-btn">
+            <i class="bi bi-trash"></i>
+        </button>
     </li>
   `).join('');
+}
+
+function updateEmptyState() {
+  emptyState.style.display = todos.length === 0 ? 'block' : 'none';
+}
+
+function updateTodoCount() {
+  const remainingCount = todos.filter(t => !t.completed).length;
+  todoCount.textContent = remainingCount;
 }
 
 init();
