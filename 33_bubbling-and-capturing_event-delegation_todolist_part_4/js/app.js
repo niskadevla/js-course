@@ -18,6 +18,7 @@ let todos = [];
 
 function init() {
   todoForm.addEventListener('submit', handleAddTodo);
+  todoList.addEventListener('click', handleTodoClick);
 }
 
 function handleAddTodo(event) {
@@ -38,6 +39,29 @@ function handleAddTodo(event) {
 
   todoInput.value = '';
   todoInput.focus();
+}
+
+function handleTodoClick(event) {
+  const target = event.target;
+  const li = target.closest('li');
+
+  if (!li) return;
+
+  const id = Number(li.dataset.id);
+
+  if (target.classList.contains('form-check-input')) {
+    toggleComplete(id);
+  }
+}
+
+function toggleComplete(id) {
+  const todo = todos.find(t => t.id === id);
+
+  if (todo) {
+    todo.completed = !todo.completed;
+  }
+
+  renderTodos();
 }
 
 function renderTodos() {
