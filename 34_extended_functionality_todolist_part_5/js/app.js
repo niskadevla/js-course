@@ -51,6 +51,14 @@ function handleTodoClick(event) {
 
   if (target.classList.contains('form-check-input')) {
     toggleComplete(id);
+  } else if (target.closest('.delete-btn')) {
+    deleteTodo(id);
+  } else if (target.closest('.edit-btn')) {
+    startEdit(id, li);
+  } else if (target.closest('.save-btn')) {
+    saveEdit(id, li);
+  } else if (target.closest('.cancel-btn')) {
+    renderTodos();
   }
 }
 
@@ -59,6 +67,56 @@ function toggleComplete(id) {
 
   if (todo) {
     todo.completed = !todo.completed;
+  }
+
+  renderTodos();
+}
+
+function deleteTodo(id) {
+  todos = todos.filter(t => t.id !== id);
+
+  renderTodos();
+}
+
+function startEdit(id, li) {
+  const todo = todos.find(t => t.id === id);
+
+  if (!todo) return;
+
+  li.innerHTML = `
+    <div class="flex-grow-1 me-2">
+      <input 
+        type="text" 
+        class="form-control form-control-sm edit-input" 
+        value="${todo.text}" 
+       >
+    </div>
+    
+    <button class="btn btn-outline-success btn-sm save-btn me-1">
+        <i class="bi bi-check-lg"></i>
+    </button>
+    <button class="btn btn-outline-secondary btn-sm cancel-btn">
+        <i class="bi bi-x-lg"></i>
+    </button>
+  `;
+
+  const input = li.querySelector('.edit-input');
+  input.focus();
+  input.select();
+}
+
+function saveEdit(id, li) {
+  const input = li.querySelector('.edit-input');
+  const newText = input.value.trim();
+
+  if (!newText) {
+    renderTodos();
+    return;
+  }
+
+  const todo = todos.find(t => t.id === id);
+  if (todo) {
+    todo.text = newText;
   }
 
   renderTodos();
