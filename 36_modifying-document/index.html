@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>36 Изменение документа, XSS атака</title>
+    <style>
+        .box {
+            padding: 20px;
+            margin: 10px 0;
+            background-color: #e3f2fd;
+            border: 2px solid #2196f3;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
+  </head>
+  <body>
+    <h1 id="title">Заголовок</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      Amet animi corporis dolorum error illo illum odio quam voluptatibus.
+    </p>
+    <p id="second">
+      Delectus fuga in molestias non quisquam recusandae sed. Error et facere voluptatum.
+    </p>
+    <div id="ad" class="box">
+      <strong>Здесь может быть Ваша реклама!</strong>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

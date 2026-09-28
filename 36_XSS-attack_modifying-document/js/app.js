@@ -104,7 +104,7 @@ function startEdit(id, li) {
       <input 
         type="text" 
         class="form-control form-control-sm edit-input" 
-        value="${todo.text}" 
+        value="${escapeHtml(todo.text)}" 
        >
     </div>
     
@@ -155,7 +155,7 @@ function renderTodos() {
               class="form-check-input"
               ${todo.completed ? 'checked' : ''}
             >
-            ${todo.text}
+            ${escapeHtml(todo.text)}
           </label>
         </div>
         
@@ -177,6 +177,12 @@ function updateEmptyState() {
 function updateTodoCount() {
   const remainingCount = todos.filter(t => !t.completed).length;
   todoCount.textContent = remainingCount;
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
 }
 
 init();
