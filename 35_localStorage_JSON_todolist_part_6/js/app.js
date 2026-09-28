@@ -13,12 +13,25 @@ const todoInput = document.getElementById('todo-input');
 const todoList = document.getElementById('todo-list');
 const emptyState = document.getElementById('empty-state');
 const todoCount = document.getElementById('todo-count');
+const STORAGE_KEY = 'todos';
 
 let todos = [];
 
 function init() {
+  loadTodos();
+  renderTodos()
+
   todoForm.addEventListener('submit', handleAddTodo);
   todoList.addEventListener('click', handleTodoClick);
+}
+
+function saveTodos() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+}
+
+function loadTodos() {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  todos = stored ? JSON.parse(stored) : [];
 }
 
 function handleAddTodo(event) {
@@ -35,6 +48,7 @@ function handleAddTodo(event) {
 
   todos.push(todo);
 
+  saveTodos();
   renderTodos();
 
   todoInput.value = '';
@@ -69,12 +83,14 @@ function toggleComplete(id) {
     todo.completed = !todo.completed;
   }
 
+  saveTodos();
   renderTodos();
 }
 
 function deleteTodo(id) {
   todos = todos.filter(t => t.id !== id);
 
+  saveTodos();
   renderTodos();
 }
 
@@ -117,6 +133,7 @@ function saveEdit(id, li) {
   const todo = todos.find(t => t.id === id);
   if (todo) {
     todo.text = newText;
+    saveTodos();
   }
 
   renderTodos();
