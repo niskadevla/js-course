@@ -120,3 +120,5 @@ const PRODUCTS = [
     sizes: ['XS', 'S', 'M', 'L']
   }
 ];
+
+console.log('Loaded products')

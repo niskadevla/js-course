@@ -1,5 +1,8 @@
+console.log('Loaded main ')
 function renderCatalogPage() {
+  console.log('Rendered')
   const container = document.querySelector('.product-grid');
+  console.log(container);
 
   if (!container) {
     return;
@@ -28,7 +31,8 @@ function formatPrice(price) {
 }
 
 function initCatalogPage() {
+  console.log('Loaded init catalog')
   renderCatalogPage();
 }
 
-initCatalogPage();
+document.addEventListener('DOMContentLoaded', initCatalogPage);
