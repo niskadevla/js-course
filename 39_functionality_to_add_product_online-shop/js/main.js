@@ -1,8 +1,5 @@
-console.log('Loaded main ')
 function renderCatalogPage() {
-  console.log('Rendered')
   const container = document.querySelector('.product-grid');
-  console.log(container);
 
   if (!container) {
     return;
@@ -24,15 +21,58 @@ function renderCatalogPage() {
       </article>
     `;
   }).join('');
+
+  container.addEventListener('click', handleCatalogProductClick)
 }
 
-function formatPrice(price) {
-  return '$' + price.toFixed(2);
+function handleCatalogProductClick(event) {
+  const button = event.target.closest('[data-product-id]');
+  if (!button) {
+    return;
+  }
+
+  addToCart(button.dataset.productId);
+  animateAddedToCart(button)
+}
+
+function addToCart(productId) {
+  const product = getProductById(productId);
+
+  if (!product) {
+    return;
+  }
+
+  const cart = getCart();
+  const existing = cart.find(product => product.id === productId);
+
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    cart.push({
+      id: productId,
+      size: product.sizes[0],
+      quantity: 1,
+    });
+  }
+
+  saveCart(cart);
+}
+
+function saveCart(cart) {
+  storeCart(cart);
+  updateCartBadge();
+}
+
+function animateAddedToCart(button) {
+  button.textContent = 'Added!';
+  setTimeout(() => {
+    button.textContent = 'Add to cart'
+  }, 1000)
 }
 
 function initCatalogPage() {
-  console.log('Loaded init catalog')
   renderCatalogPage();
+  updateCartBadge();
 }
 
 document.addEventListener('DOMContentLoaded', initCatalogPage);

@@ -121,4 +121,7 @@ const PRODUCTS = [
   }
 ];
 
-console.log('Loaded products')
+
+function getProductById(productId) {
+  return PRODUCTS.find(product => product.id === productId);
+}
