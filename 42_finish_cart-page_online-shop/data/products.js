@@ -121,7 +121,6 @@ const PRODUCTS = [
   }
 ];
 
-
 function getProductById(productId) {
   return PRODUCTS.find(product => product.id === productId);
 }

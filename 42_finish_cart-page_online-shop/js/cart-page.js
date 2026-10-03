@@ -12,6 +12,7 @@ function renderCartPage() {
   }
 
   const cart = getCart();
+  container.innerHTML = '';
 
   if (cart.length === 0) {
     container.innerHTML = '<p class="cart-empty">Your cart is empty.</p>';
@@ -26,7 +27,33 @@ function renderCartPage() {
     }
 
     container.append(createCartItem(item, product, index));
+  });
+
+  totalEl.textContent = formatPrice(getTotalPrice(cart));
+
+  container.querySelectorAll('.cart-item__remove').forEach(button=> {
+    button.addEventListener('click', () => removeFromCart(Number(button.dataset.index)));
+  });
+
+  container.querySelectorAll('.cart-item__size').forEach(select => {
+    select.addEventListener('change', () => updateCartSize(Number(select.dataset.index), select.value))
   })
+}
+
+function getTotalPrice(cart) {
+  let total = 0;
+
+  cart.forEach(item => {
+    const product = getProductById(item.id);
+
+    if (!product) {
+      return;
+    }
+
+    total += product.price * item.quantity;
+  });
+
+  return total;
 }
 
 function createCartItem(item, product, index) {
@@ -60,6 +87,26 @@ function createCartItem(item, product, index) {
   `;
 
   return article;
+}
+
+function removeFromCart(index) {
+  const cart = getCart();
+  cart.splice(index, 1);
+  saveCart(cart);
+  renderCartPage();
+}
+
+function updateCartSize(index, size) {
+  const cart = getCart();
+  if (cart[index]) {
+    cart[index].size = size;
+    saveCart(cart);
+  }
+}
+
+function saveCart(cart) {
+  storeCart(cart);
+  updateCartBadge();
 }
 
 document.addEventListener('DOMContentLoaded', initCartPage);
