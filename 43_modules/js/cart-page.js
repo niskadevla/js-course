@@ -1,3 +1,7 @@
+import { formatPrice, updateCartBadge } from './utils.js';
+import { getCart, storeCart } from '../data/cart.js';
+import { getProductById } from '../data/products.js';
+
 function initCartPage() {
   renderCartPage();
   updateCartBadge();

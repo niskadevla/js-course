@@ -1,15 +1,15 @@
 const CART_KEY = 'styleshop-cart';
 
-function storeCart(cart) {
+export function storeCart(cart) {
   localStorage.setItem(CART_KEY, JSON.stringify(cart));
 }
 
-function getCart() {
+export function getCart() {
   const storedCart = localStorage.getItem(CART_KEY);
   return storedCart ? JSON.parse(storedCart) : [];
 }
 
-function getCartItemCount() {
+export function getCartItemCount() {
   return getCart().reduce((total, item) => {
     return total + item.quantity;
   }, 0)

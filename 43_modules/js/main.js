@@ -1,3 +1,9 @@
+import { PRODUCTS, getProductById } from "../data/products.js";
+import { updateCartBadge } from "./utils.js";
+// import { updateCartBadge as updateCart } from "./utils.js";
+import formatPrice from "./utils.js";
+import * as Cart from "../data/cart.js";
+
 function renderCatalogPage() {
   const container = document.querySelector('.product-grid');
 
@@ -42,7 +48,7 @@ function addToCart(productId) {
     return;
   }
 
-  const cart = getCart();
+  const cart = Cart.getCart();
   const existing = cart.find(product => product.id === productId);
 
   if (existing) {
@@ -59,7 +65,7 @@ function addToCart(productId) {
 }
 
 function saveCart(cart) {
-  storeCart(cart);
+  Cart.storeCart(cart);
   updateCartBadge();
 }
 

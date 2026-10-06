@@ -1,4 +1,4 @@
-const PRODUCTS = [
+export const PRODUCTS = [
   {
     id: '669a76c550f126d9',
     name: 'Classic T-Shirt',
@@ -121,6 +121,6 @@ const PRODUCTS = [
   }
 ];
 
-function getProductById(productId) {
+export function getProductById(productId) {
   return PRODUCTS.find(product => product.id === productId);
 }
