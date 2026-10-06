@@ -2,7 +2,16 @@ import { PRODUCTS, getProductById } from "../data/products.js";
 import { updateCartBadge } from "./utils.js";
 // import { updateCartBadge as updateCart } from "./utils.js";
 import formatPrice from "./utils.js";
-import * as Cart from "../data/cart.js";
+import { Cart } from "../data/cart.js";
+
+const cartManager = new Cart('styleshop-favorite'); // {}
+
+console.log(cartManager);
+console.log(cartManager.cartKey);
+cartManager.cartKey = 'styleshop-private'
+console.log(cartManager.cartKey);
+
+console.log(typeof Cart); // function
 
 function renderCatalogPage() {
   const container = document.querySelector('.product-grid');
@@ -48,7 +57,7 @@ function addToCart(productId) {
     return;
   }
 
-  const cart = Cart.getCart();
+  const cart = cartManager.getCart();
   const existing = cart.find(product => product.id === productId);
 
   if (existing) {
@@ -65,7 +74,7 @@ function addToCart(productId) {
 }
 
 function saveCart(cart) {
-  Cart.storeCart(cart);
+  cartManager.storeCart(cart);
   updateCartBadge();
 }
 

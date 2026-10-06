@@ -1,7 +1,9 @@
 import { updateCartBadge } from './utils.js';
 import formatPrice from './utils.js';
-import { getCart, storeCart } from '../data/cart.js';
+import { Cart } from '../data/cart.js';
 import { getProductById } from '../data/products.js';
+
+const cartManager = new Cart('styleshop-favorite');
 
 function initCartPage() {
   renderCartPage();
@@ -16,7 +18,7 @@ function renderCartPage() {
     return;
   }
 
-  const cart = getCart();
+  const cart = cartManager.getCart();
   container.innerHTML = '';
 
   if (cart.length === 0) {
@@ -95,14 +97,14 @@ function createCartItem(item, product, index) {
 }
 
 function removeFromCart(index) {
-  const cart = getCart();
+  const cart = cartManager.getCart();
   cart.splice(index, 1);
   saveCart(cart);
   renderCartPage();
 }
 
 function updateCartSize(index, size) {
-  const cart = getCart();
+  const cart = cartManager.getCart();
   if (cart[index]) {
     cart[index].size = size;
     saveCart(cart);
@@ -110,7 +112,7 @@ function updateCartSize(index, size) {
 }
 
 function saveCart(cart) {
-  storeCart(cart);
+  cartManager.storeCart(cart);
   updateCartBadge();
 }
 
