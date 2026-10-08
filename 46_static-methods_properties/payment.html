@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StyleShop — Payment</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="payment">
+<header class="header">
+  <div class="container header__inner">
+    <a href="index.html" class="header__logo">StyleShop</a>
+    <nav class="header__nav">
+      <a href="index.html">Home</a>
+      <a href="cart.html" class="header__cart">
+        Cart
+        <span class="header__cart-count">2</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main class="container payment-page">
+  <h1 class="cart-page__title">Checkout</h1>
+
+  <div id="payment-empty" class="payment-empty" hidden>
+    <p>Your cart is empty. Add something before checkout.</p>
+    <a href="index.html" class="btn">Continue shopping</a>
+  </div>
+
+  <div id="payment-content" class="payment-layout">
+    <form id="payment-form" class="payment-form">
+      <section class="payment-panel">
+        <h2 class="payment-panel__title">Contact and delivery</h2>
+        <label class="payment-field">
+          <span>Full name</span>
+          <input type="text" name="name" autocomplete="name" required>
+        </label>
+        <label class="payment-field">
+          <span>Email</span>
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+        <label class="payment-field">
+          <span>Delivery address</span>
+          <input type="text" name="address" autocomplete="street-address" required>
+        </label>
+      </section>
+
+      <section class="payment-panel">
+        <h2 class="payment-panel__title">Payment method</h2>
+        <label class="payment-choice">
+          <input type="radio" name="payment-method" value="card" checked>
+          <span>Card (demo checkout)</span>
+        </label>
+        <label class="payment-choice">
+          <input type="radio" name="payment-method" value="cash">
+          <span>Cash on delivery</span>
+        </label>
+        <p class="payment-note">This demo does not collect or process card details.</p>
+      </section>
+
+      <button type="submit" class="btn payment-submit">Place order</button>
+    </form>
+
+    <aside class="payment-panel payment-order">
+      <h2 class="payment-panel__title">Your order</h2>
+      <div id="payment-items" class="payment-order__items"></div>
+      <p class="payment-order__total">Total <strong id="payment-total">$0.00</strong></p>
+    </aside>
+  </div>
+
+  <div id="payment-success" class="payment-success" role="status" hidden>
+    <h2>Thank you for your order!</h2>
+    <p>Your demo order has been placed.</p>
+    <a href="index.html" class="btn">Continue shopping</a>
+  </div>
+</main>
+
+<footer class="footer">
+  <p>&copy; 2026 StyleShop. All rights reserved.</p>
+</footer>
+
+<script type="module" src="js/payment.js"></script>
+</body>
+</html>
