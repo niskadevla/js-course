@@ -1,5 +1,4 @@
 import { Cart } from './cart.js'
-console.log('Favorites');
 
 export class Favorites extends Cart {
   constructor() {
@@ -7,7 +6,7 @@ export class Favorites extends Cart {
     console.log('Key = ',this.cartKey);
   }
 
-  getCart() {
+  getFavorites() {
     console.log('getCart from Favorites');
     return super.getCart();
   }
@@ -20,14 +19,3 @@ export class Favorites extends Cart {
     return this.getCart().length > 0;
   }
 }
-
-const favorites = new Favorites();
-
-// favorites.storeCart([1,2,10]);
-//
-console.log(favorites.getCart());
-// console.log(favorites);
-
-console.log(favorites.getCartItemCount())
-
-console.log(favorites.hasItems());
