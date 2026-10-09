@@ -351,8 +351,9 @@ button {
   gap: 12px;
 }
 
-.payment-page {
-  min-height: calc(100vh - 72px);
+.payment-page,
+.favorites-page {
+  min-height: calc(100vh - 154px);
   background-color: #f7f5f2;
 }
 
