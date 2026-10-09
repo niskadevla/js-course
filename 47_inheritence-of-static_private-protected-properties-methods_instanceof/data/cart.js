@@ -33,23 +33,3 @@ export class Cart {
     }, 0)
   }
 }
-
-// console.log(Cart.storageKey);
-//
-// const cartManager = new Cart();
-//
-// console.log(cartManager.storageKey)
-
-/*
-const cartManager = Cart.createCart();
-console.log(cartManager);
- */
-
-/*
-function Cart(key) {
-  const cart = {} // this = {}
-  cart.cartKey = key;
-
-  return cart;
-}
-*/
