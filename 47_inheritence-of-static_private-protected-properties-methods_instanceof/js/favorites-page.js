@@ -1,0 +1,1 @@
+import * as Favorites from '../data/favorites.js';
