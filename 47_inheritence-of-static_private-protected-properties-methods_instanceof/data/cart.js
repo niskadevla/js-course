@@ -1,29 +1,35 @@
+const STORAGE_KEY = 'styleshop-cart';
+
 export class Cart {
-  _cartKey = 'styleshop-cart';
-  static storageKey = 'styleshop-cart';
+  #cartKey;
+  static storageKey = STORAGE_KEY;
 
   get cartKey() {
-    return this._cartKey;
+    return this.#cartKey;
   }
 
   set cartKey(cartKey) {
-    this._cartKey = cartKey;
+    this.#cartKey = cartKey;
   }
 
-  constructor(key = this._cartKey) {
-    this._cartKey = key;
+  constructor(key = STORAGE_KEY) {
+    this.#cartKey = key;
   }
 
-  static createCart(cartKey = this.storageKey) {
-    return new Cart(cartKey);
+  #showKey() {
+    return this.#cartKey;
+  }
+
+  static createCart(cartKey = STORAGE_KEY) {
+    return new this(cartKey);
   }
 
   storeCart(cart) {
-    localStorage.setItem(this._cartKey, JSON.stringify(cart));
+    localStorage.setItem(this.#cartKey, JSON.stringify(cart));
   }
 
   getCart() {
-    const storedCart = localStorage.getItem(this._cartKey);
+    const storedCart = localStorage.getItem(this.#cartKey);
     return storedCart ? JSON.parse(storedCart) : [];
   }
 
