@@ -1,7 +1,7 @@
 import { updateCartBadge } from './utils.js';
 import formatPrice from './utils.js';
 import { Cart } from '../data/cart.js';
-import { getProductById } from '../data/products.js';
+import { getProductById, loadProducts } from '../data/products.js';
 
 const cartManager = new Cart();
 
@@ -116,4 +116,9 @@ function saveCart(cart) {
   updateCartBadge();
 }
 
-document.addEventListener('DOMContentLoaded', initCartPage);
+document.addEventListener('DOMContentLoaded', () => {
+  loadProducts()
+    .then(() => {
+      initCartPage();
+    })
+});

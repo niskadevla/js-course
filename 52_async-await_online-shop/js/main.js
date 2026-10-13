@@ -1,4 +1,5 @@
-import { PRODUCTS, getProductById } from "../data/products.js";
+// import {Products} from '../data/products.class.js';
+import {getProducts, getProductById, loadProducts} from "../data/products.js";
 import { updateCartBadge } from "./utils.js";
 import formatPrice from "./utils.js";
 import { Cart } from "../data/cart.js";
@@ -12,7 +13,7 @@ function renderCatalogPage() {
     return;
   }
 
-  container.innerHTML = PRODUCTS.map(product => {
+  container.innerHTML = getProducts().map(product => {
     return `
       <article class="product-card">
         <div class="product-card__image-wrap">
@@ -82,4 +83,7 @@ function initCatalogPage() {
   updateCartBadge();
 }
 
-document.addEventListener('DOMContentLoaded', initCatalogPage);
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadProducts();
+  initCatalogPage();
+});
